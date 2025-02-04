@@ -62,10 +62,18 @@ class StringCalculator:
             return inp_str[4:]
         return inp_str.strip()
 
+    @staticmethod
+    def _check_for_negative_numbers(numbers: List[int]) -> None:
+        neg_numbers = list(filter(lambda num: num < 0, numbers))
+        if neg_numbers:
+            out_str = ",".join(map(lambda num: str(num), neg_numbers))
+            raise ValueError("negative numbers not allowed " + out_str)
+
     def add(self, inp_str: str) -> int:
         if inp_str == "":
             return 0
         delimeter: str = StringCalculator._determine_delimeter(inp_str)
         inp_str: str = StringCalculator._clean_input(inp_str)
         numbers: List[int] = StringCalculator._get_numbers(inp_str, delimeter)
+        StringCalculator._check_for_negative_numbers(numbers)
         return sum(numbers)
