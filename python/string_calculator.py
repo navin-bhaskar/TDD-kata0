@@ -1,6 +1,8 @@
 import re
 from typing import List, Optional
 
+IGNORE_THRESHOLD = 1000
+
 
 class StringCalculator:
     """simple string calculator class"""
@@ -87,4 +89,6 @@ class StringCalculator:
         inp_str: str = StringCalculator._clean_input(inp_str)
         numbers: List[int] = StringCalculator._get_numbers(inp_str, delimeter)
         StringCalculator._check_for_negative_numbers(numbers)
+        # filter out numbers th
+        numbers = filter(lambda num: num < IGNORE_THRESHOLD, numbers)
         return sum(numbers)
