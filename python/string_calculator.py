@@ -54,10 +54,15 @@ class StringCalculator:
                 raise ValueError("Invalid input")
             delems = inp_str[2:new_line_at]
             all_delems = []
-            for cur_del in delems.split("]"):
-                if not cur_del:
-                    continue  # Ignore the last empty string after split
-                all_delems.append(cur_del[1:])  # Ignore leading [
+            if delems.find("[") == -1:
+                # Single char delemeter
+                all_delems.append(delems)
+            else:
+                # Multi char/Multi dlemes
+                for cur_del in delems.split("]"):
+                    if not cur_del:
+                        continue  # Ignore the last empty string after split
+                    all_delems.append(cur_del[1:])  # Ignore leading [
             return all_delems
         else:
             return [","]
