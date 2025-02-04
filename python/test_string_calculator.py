@@ -60,3 +60,7 @@ class TestStringCalc(unittest.TestCase):
     def test_input_has_custom_delimeter__custom_delimeters_ar_used(self):
         sc = StringCalculator()
         self.assertEqual(sc.add("//[***]\n1***2***3"), 6)
+
+    def test_input_has_multiple_delems__multiple_delems_used(self):
+        sc = StringCalculator()
+        self.assertEqual(sc.add("//[*][%]\n1*2%3"), 6)
