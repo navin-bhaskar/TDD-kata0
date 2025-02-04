@@ -26,7 +26,11 @@ class StringCalcTester(unittest.TestCase):
             assert sc.add(inp_str) == expected_sum
             inp_str = inp_str + ","
 
-    def test_input_has_new_line__new_line_also_handled_as_seperator(self):
+    def test_add_input_has_new_line__new_line_also_handled_as_seperator(self):
         sc = StringCalculator()
 
         assert sc.add("1\n2,3") == 6
+
+    def test_add_input_has_custom_delimeter__custom_delimeter_is_used(self):
+        sc = StringCalculator()
+        assert sc.add("//;\n1;2") == 3
