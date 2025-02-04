@@ -34,3 +34,9 @@ class TestStringCalc(unittest.TestCase):
     def test_add_input_has_custom_delimeter__custom_delimeter_is_used(self):
         sc = StringCalculator()
         assert sc.add("//;\n1;2") == 3
+
+    def test_input_string_has_negative_numbers__add_throws_excpetion_with_message(self):
+        sc = StringCalculator()
+        with self.assertRaises(ValueError) as context:
+            sc.add("1,-1")
+        self.assertEqual(str(context), "negative numbers not allowed -1")
