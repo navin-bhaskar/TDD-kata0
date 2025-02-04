@@ -1,3 +1,4 @@
+import re
 from typing import List
 
 
@@ -10,7 +11,8 @@ class StringCalculator:
         if inp_str == "":
             return 0
 
-        for num_str in inp_str.split(","):
+        split_str: List[str] = re.split(r"[,|\n]", inp_str)
+        for num_str in split_str:
             try:
                 cur_num: int = int(num_str)
                 numbers.append(cur_num)
