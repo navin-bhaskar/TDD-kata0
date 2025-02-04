@@ -40,3 +40,13 @@ class TestStringCalc(unittest.TestCase):
         with self.assertRaises(ValueError) as context:
             sc.add("1,-1")
         self.assertEqual(str(context.exception), "negative numbers not allowed -1")
+
+    def test_input_string_has_multiple_negative_numbers__all_negative_numbers_listed(
+        self,
+    ):
+        sc = StringCalculator()
+        with self.assertRaises(ValueError) as context:
+            sc.add("1,-1,2,3,-4,5,-6,-8,9")
+        self.assertEqual(
+            str(context.exception), "negative numbers not allowed -1,-4,-6,-8"
+        )
