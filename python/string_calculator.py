@@ -64,6 +64,17 @@ class StringCalculator:
 
     @staticmethod
     def _check_for_negative_numbers(numbers: List[int]) -> None:
+        """Checks if the input numbers has negative numbers and throws
+        exception if found. If there are multiple negative numbers then
+        they are listed out in exception message (comma seperated)
+
+        Args:
+            numbers (List[int]): Numbers extracted from the input string
+
+        Raises:
+            ValueError: Raises value error with appropriate message if negative numbers
+            are found.
+        """
         neg_numbers = list(filter(lambda num: num < 0, numbers))
         if neg_numbers:
             out_str = ",".join(map(lambda num: str(num), neg_numbers))
