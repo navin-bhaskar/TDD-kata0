@@ -39,4 +39,4 @@ class TestStringCalc(unittest.TestCase):
         sc = StringCalculator()
         with self.assertRaises(ValueError) as context:
             sc.add("1,-1")
-        self.assertEqual(str(context), "negative numbers not allowed -1")
+        self.assertEqual(str(context.exception), "negative numbers not allowed -1")
