@@ -8,3 +8,9 @@ class StringCalcTester(unittest.TestCase):
     def test_pass_empty_string_to_add__get_back_0(self):
         sc = StringCalculator()
         assert sc.add("") == 0
+
+    def test_input_single_digit_str__get_back_same_digit_as_int(self):
+        sc = StringCalculator()
+        out = sc.add("1")
+        assert isinstance(out, int)
+        assert out == 1
