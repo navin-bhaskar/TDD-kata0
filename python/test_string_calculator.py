@@ -18,3 +18,10 @@ class StringCalcTester(unittest.TestCase):
     def test_pass_comma_seperated_ints__add_returns_sum_of_ints(self):
         sc = StringCalculator()
         assert sc.add("1,5") == 6
+
+        inp_str: str = ""
+        for n in range(1, 11):
+            expected_sum = n * (n + 1) // 2
+            inp_str = inp_str + str(n)
+            assert sc.add(inp_str) == expected_sum
+            inp_str = inp_str + ","
