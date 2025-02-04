@@ -14,3 +14,7 @@ class StringCalcTester(unittest.TestCase):
         out = sc.add("1")
         assert isinstance(out, int)
         assert out == 1
+
+    def test_pass_comma_seperated_ints__add_returns_sum_of_ints(self):
+        sc = StringCalculator()
+        assert sc.add("1,5") == 6
