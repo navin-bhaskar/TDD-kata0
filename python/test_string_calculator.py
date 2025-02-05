@@ -82,3 +82,9 @@ class TestStringCalc(unittest.TestCase):
         with self.assertRaises(ValueError) as context:
             sc.add("1,2,3,this")
         self.assertEqual(str(context.exception), "Invalid number: this")
+
+    def test_add_input_delimeter_is_invalid__throws_exception(self):
+        sc = StringCalculator()
+        with self.assertRaises(ValueError) as context:
+            self.assertEqual(sc.add("//;\n1,2"), 3)
+        self.assertEqual(str(context.exception), "Invalid number: 1,2")
