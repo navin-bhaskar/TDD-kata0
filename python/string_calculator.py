@@ -51,7 +51,7 @@ class StringCalculator:
         if inp_str.startswith("//") and len(inp_str) > 4:
             new_line_at = inp_str.find("\n")
             if new_line_at == -1:
-                raise ValueError("Invalid input")
+                raise ValueError("Invalid input, could not determine delimeter")
             delems = inp_str[2:new_line_at]
             all_delems = []
             if delems.find("[") == -1:

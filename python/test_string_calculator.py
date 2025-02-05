@@ -68,3 +68,11 @@ class TestStringCalc(unittest.TestCase):
     def test_input_has_all_1000__add_returns_zero(self):
         sc = StringCalculator()
         self.assertEqual(sc.add("1000,1000,1000,1000"), 0)
+
+    def test_delimeter_is_not_followed_by_new_line__add_throws_exception(self):
+        sc = StringCalculator()
+        with self.assertRaises(ValueError) as context:
+            sc.add("//;1;2;3")
+        self.assertEqual(
+            str(context.exception), "Invalid input, could not determine delimeter"
+        )
