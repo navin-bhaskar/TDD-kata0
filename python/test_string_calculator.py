@@ -76,3 +76,9 @@ class TestStringCalc(unittest.TestCase):
         self.assertEqual(
             str(context.exception), "Invalid input, could not determine delimeter"
         )
+
+    def test_non_numerical_value_in_input__add_throws_exception(self):
+        sc = StringCalculator()
+        with self.assertRaises(ValueError) as context:
+            sc.add("1,2,3,this")
+        self.assertEqual(str(context.exception), "Invalid number: this")
