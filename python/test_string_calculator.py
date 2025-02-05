@@ -64,3 +64,7 @@ class TestStringCalc(unittest.TestCase):
     def test_input_has_multiple_delems__multiple_delems_used(self):
         sc = StringCalculator()
         self.assertEqual(sc.add("//[*][%]\n1*2%3"), 6)
+
+    def test_input_has_all_1000__add_returns_zero(self):
+        sc = StringCalculator()
+        self.assertEqual(sc.add("1000,1000,1000,1000"), 0)
