@@ -35,7 +35,7 @@ class StringCalculator:
                 cur_num: int = int(num_str)
                 numbers.append(cur_num)
             except ValueError:
-                raise ValueError("Invalid number: {num_str}")
+                raise ValueError(f"Invalid number: {num_str}")
         return numbers
 
     @staticmethod
