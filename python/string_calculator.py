@@ -104,6 +104,25 @@ class StringCalculator:
             raise ValueError("negative numbers not allowed " + out_str)
 
     def add(self, inp_str: str) -> int:
+        """Given an input string, conatining delimeted numbers returns the sum.
+        Default delimeter to be used is ','. Custom delimeter can be specifed by
+        passing '//' followed by delimeter followed by newline.
+        Newline is also considered as delimeter.
+        Multichar delimeters can also be specified. These are to be surrounded by
+        [] brackets.
+        Note: Negative numbers are not accepted(raises exception), values greater that 1000 are
+        ignored.
+
+        Args:
+            inp_str: Input str that conating delimeters and ints
+
+        Returns:
+            int: Integer sum of the numbers
+
+        Raises:
+            ValueError when the input is invalid (including -ve numbers)
+
+        """
         if inp_str == "":
             return 0
         delimeters: str = StringCalculator._determine_delimeters(inp_str)
