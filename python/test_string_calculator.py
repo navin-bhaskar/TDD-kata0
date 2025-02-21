@@ -57,3 +57,9 @@ class TestStringCalc(unittest.TestCase):
             sc.add("1,2,-3,4,5,-6")
 
         self.assertEqual("negatives not allowed -3, -6", str(cm.exception))
+
+    def test__nums_greater_than_1000_passed__numbers_greater_than_thousand_ignored(self):
+        """ Numbers bigger than 1000 should be ignored, so adding 2 + 1001 = 2"""
+        sc = StringCalculator()
+
+        self.assertEqual(sc.add("1,2,1000,1001,3"), 6)
