@@ -4,6 +4,21 @@ from typing import List
 IGNORE_THRESHOLD = 1000
 
 
+def get_numbers_dec(processing_func):
+    def wrapper(s, inp_str):
+        numbers = []
+        if not inp_str:
+            return processing_func(s, numbers)
+
+        delimeters: str = StringCalculator._determine_delimeters(inp_str)
+        inp_str: str = StringCalculator._clean_input(inp_str)
+        numbers: List[int] = StringCalculator._get_numbers(inp_str, delimeters)
+        StringCalculator._check_for_negative_numbers(numbers)
+        return processing_func(s, numbers)
+
+    return wrapper
+
+
 class StringCalculator:
     """simple string calculator class"""
 
@@ -103,7 +118,8 @@ class StringCalculator:
             out_str = ",".join(map(lambda num: str(num), neg_numbers))
             raise ValueError("negative numbers not allowed " + out_str)
 
-    def add(self, inp_str: str) -> int:
+    @get_numbers_dec
+    def add(self, numbers: int) -> int:
         """Given an input string, conatining delimeted numbers returns the sum.
         Default delimeter to be used is ','. Custom delimeter can be specifed by
         passing '//' followed by delimeter followed by newline.
@@ -123,12 +139,7 @@ class StringCalculator:
             ValueError when the input is invalid (including -ve numbers)
 
         """
-        if inp_str == "":
-            return 0
-        delimeters: str = StringCalculator._determine_delimeters(inp_str)
-        inp_str: str = StringCalculator._clean_input(inp_str)
-        numbers: List[int] = StringCalculator._get_numbers(inp_str, delimeters)
-        StringCalculator._check_for_negative_numbers(numbers)
+
         # filter out numbers that are greater than IGNORE_THRESHOLD
         numbers = filter(lambda num: num < IGNORE_THRESHOLD, numbers)
         return sum(numbers)
