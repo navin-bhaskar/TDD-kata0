@@ -15,3 +15,6 @@ class TestStringCalc(unittest.TestCase):
 
         res = sc.add("1")
         assert res == 1
+
+        res = sc.add("1,2")
+        assert res == 3
