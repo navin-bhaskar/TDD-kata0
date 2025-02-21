@@ -40,9 +40,20 @@ class TestStringCalc(unittest.TestCase):
         
 
     def test__custom_delimeter_passed__custom_delimeter_used(self):
-        """req 4. Support different delimiters
+        """req 4: Support different delimiters
         to change a delimiter, the beginning of the string will contain a separate line that looks like this: “//[delimiter]\n[numbers…]” for example “//;\n1;2” should return three where the default delimiter is ‘;’ .
         the first line is optional. all existing scenarios should still be supported"""
         sc = StringCalculator()
 
         assert sc.add("//;\n1;2") == 3
+
+    def test__negative_numers_in_input_to_add__throws_exception(self):
+        """req5: 5. Calling Add with a negative number will throw an exception 
+        “negatives not allowed” - and the negative that was passed.
+        if there are multiple negatives, show all of them in the exception message."""
+        sc = StringCalculator()
+
+        with self.assertRaises(ValueError) as cm:
+            sc.add("1,2,-3,4,5,-6")
+
+        self.assertEqual("negatives not allowed -3, -6", str(cm.exception))
