@@ -31,6 +31,13 @@ class StringCalculator:
         if inp_str.startswith("//"):
             return inp_str[4:]
         return inp_str
+    
+    @staticmethod
+    def _check_input(nums: List[int]) -> None:
+        neg_numbers = list(filter(lambda num: num < 0, nums))
+        if len(neg_numbers) != 0:
+            neg_num_str = ", ".join(map(lambda num: str(num), neg_numbers))
+            raise ValueError(f"negatives not allowed {neg_num_str}")
 
     def add(self, inp_str: str) -> int:
         if inp_str == "":
@@ -38,4 +45,5 @@ class StringCalculator:
         delem = StringCalculator._get_delem(inp_str)
         inp_str = StringCalculator._clean_input(inp_str)
         nums = StringCalculator._get_numbers(inp_str, delem)
+        self._check_input(nums)
         return sum(nums)
