@@ -1,5 +1,4 @@
-
-
+import re
 from typing import List
 
 
@@ -7,7 +6,8 @@ class StringCalculator:
 
     @staticmethod
     def _get_numbers(inp_str: str) -> List[int]:
-        nums_strs: List[str] = inp_str.split(",")
+        reg_exp: str = r",|\n"
+        nums_strs: List[str] = re.split(reg_exp, inp_str)
 
         nums: List[int] = []
 

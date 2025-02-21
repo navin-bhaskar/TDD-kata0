@@ -31,3 +31,10 @@ class TestStringCalc(unittest.TestCase):
             inp_str += ","
 
 
+    def test__newline_in_input__newline_considered_as_seperator(self):
+        """req3:  Allow the Add method to handle new lines between numbers (instead of commas).
+            1. the following input is ok: “1\n2,3” (will equal 6)
+            2. the following input is NOT ok: “1,\n” (not need to prove it - just clarifying)"""
+        sc = StringCalculator()
+        assert sc.add("1\n2,3") == 6
+        
