@@ -59,7 +59,15 @@ class TestStringCalc(unittest.TestCase):
         self.assertEqual("negatives not allowed -3, -6", str(cm.exception))
 
     def test__nums_greater_than_1000_passed__numbers_greater_than_thousand_ignored(self):
-        """ Numbers bigger than 1000 should be ignored, so adding 2 + 1001 = 2"""
+        """req6: Numbers bigger than 1000 should be ignored, so adding 2 + 1001 = 2"""
         sc = StringCalculator()
 
         self.assertEqual(sc.add("1,2,1000,1001,3"), 6)
+
+    def test_varibale_length_delimter_passed__variable_length_delimter_used(self):
+        """req7: Delimiters can be of any length with the following format: 
+        “//[delimiter]\n” for example: “//[***]\n1**_2_**3” should return 6"""
+        sc = StringCalculator()
+
+        self.assertEqual(sc.add("//[***]\n1**_2_**3"), 3)
+
