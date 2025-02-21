@@ -66,8 +66,8 @@ class TestStringCalc(unittest.TestCase):
 
     def test_varibale_length_delimter_passed__variable_length_delimter_used(self):
         """req7: Delimiters can be of any length with the following format: 
-        “//[delimiter]\n” for example: “//[***]\n1**_2_**3” should return 6"""
+        “//[delimiter]\n” for example: “//[***]\n1***2***3” should return 6"""
         sc = StringCalculator()
 
-        self.assertEqual(sc.add("//[***]\n1**_2_**3"), 3)
+        self.assertEqual(sc.add("//[***]\n1***2***3"), 6)
 

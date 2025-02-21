@@ -7,9 +7,8 @@ class StringCalculator:
 
     @staticmethod
     def _get_numbers(inp_str: str, delem: str) -> List[int]:
-        reg_exp: str = delem + r"|\n"
+        reg_exp: str = re.escape(delem) + r"|\n"
         nums_strs: List[str] = re.split(reg_exp, inp_str)
-
         nums: List[int] = []
 
         for num_str in nums_strs:
@@ -21,8 +20,15 @@ class StringCalculator:
 
     @staticmethod
     def _get_delem(inp_str: str):
+        delem: str = ""
         if inp_str.startswith("//"):
-            delem: str = inp_str[2]
+            temp: str = inp_str.split("\n")[0]
+            bracket_loc: int = temp.find("[")
+            if bracket_loc != -1:
+                # variable length delimter
+                delem = temp[bracket_loc+1:temp.find("]")]
+            else:
+                delem = temp[2]
         else:
             delem = ","
         return delem
@@ -30,7 +36,7 @@ class StringCalculator:
     @staticmethod
     def _clean_input(inp_str: str):
         if inp_str.startswith("//"):
-            return inp_str[4:]
+            return inp_str.split("\n")[1]
         return inp_str
     
     @staticmethod
