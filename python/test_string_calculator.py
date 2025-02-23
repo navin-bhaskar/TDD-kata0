@@ -64,10 +64,17 @@ class TestStringCalc(unittest.TestCase):
 
         self.assertEqual(sc.add("1,2,1000,1001,3"), 6)
 
-    def test_varibale_length_delimter_passed__variable_length_delimter_used(self):
+    def test__varibale_length_delimter_passed__variable_length_delimter_used(self):
         """req7: Delimiters can be of any length with the following format: 
         “//[delimiter]\n” for example: “//[***]\n1***2***3” should return 6"""
         sc = StringCalculator()
 
         self.assertEqual(sc.add("//[***]\n1***2***3"), 6)
+
+    def test__multiple_delimter_passed__multiple_delimters_considered(self):
+        """ Allow multiple delimiters like this: “//[delim1][delim2]\n” 
+        for example “//[\*][%]\n1\*2%3” should return 6."""
+        sc = StringCalculator()
+        
+        self.assertEqual(sc.add("//[\*][%]\n1\*2%3"), 6)
 
