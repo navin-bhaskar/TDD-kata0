@@ -6,8 +6,14 @@ IGNORE_THRESHOLD_NUM = 1000
 class StringCalculator:
 
     @staticmethod
-    def _get_numbers(inp_str: str, delem: str) -> List[int]:
-        reg_exp: str = re.escape(delem) + r"|\n"
+    def _get_numbers(inp_str: str, delems: List[str]) -> List[int]:
+        reg_exp: str = ""
+        
+        for delem in delems:
+            reg_exp += re.escape(delem) + r"|"
+
+        reg_exp += r"\n"
+
         nums_strs: List[str] = re.split(reg_exp, inp_str)
         nums: List[int] = []
 
@@ -19,19 +25,22 @@ class StringCalculator:
         return nums
 
     @staticmethod
-    def _get_delem(inp_str: str):
-        delem: str = ""
+    def _get_delems(inp_str: str) -> List[str]:
+        delems: List[str] = []
         if inp_str.startswith("//"):
+            inp_str = inp_str.removeprefix("//")
             temp: str = inp_str.split("\n")[0]
             bracket_loc: int = temp.find("[")
             if bracket_loc != -1:
-                # variable length delimter
-                delem = temp[bracket_loc+1:temp.find("]")]
+                temp_delems = temp.split("]")
+                for temp_delem in temp_delems:
+                    if temp_delem:
+                        delems.append(temp_delem[1:])
             else:
-                delem = temp[2]
+                delems = [temp[0]]
         else:
-            delem = ","
-        return delem
+            delems = [","]
+        return delems
 
     @staticmethod
     def _clean_input(inp_str: str):
@@ -50,7 +59,7 @@ class StringCalculator:
         if inp_str == "":
             return 0
         nums: List[int] = []
-        delem = StringCalculator._get_delem(inp_str)
+        delem = StringCalculator._get_delems(inp_str)
         inp_str = StringCalculator._clean_input(inp_str)
         nums = StringCalculator._get_numbers(inp_str, delem)
         self._check_input(nums)
