@@ -78,3 +78,10 @@ class TestStringCalc(unittest.TestCase):
         
         self.assertEqual(sc.add("//[\*][%]\n1\*2%3"), 6)
 
+    def test__multiple_delimter_longer_than_one_char_passed__multiple_delimters_considered(self):
+        """ Allow multiple delimiters like this: “//[delim1][delim2]\n” 
+        for example “//[\*][%]\n1\*2%3” should return 6."""
+        sc = StringCalculator()
+        
+        self.assertEqual(sc.add("//[,][%][^^]\n1,2%3^^4"), 10)
+
